@@ -1,0 +1,15 @@
+# Node modules (dependencies)
+node_modules/
+
+# Logs
+*.log
+
+# Environment variables (if you're using .env files)
+.env
+
+# Vercel specific
+.vercel/
+
+# OS-specific files (Windows, macOS, etc.)
+Thumbs.db
+.DS_Store
