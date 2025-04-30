@@ -1,6 +1,5 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/check", "dest": "api/check.js" }
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
   ]
 }

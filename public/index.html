@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Palindrome Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Palindrome Checker</h1>
+  <input type="text" id="inputText" placeholder="Enter text to check..." />
+  <button onclick="checkPalindrome()">Check</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    async function checkPalindrome() {
+      const inputText = document.getElementById('inputText').value;
+      const resultDiv = document.getElementById('result');
+
+      try {
+        const response = await fetch('/check?text=' + encodeURIComponent(inputText));
+        const data = await response.json();
+        if (response.ok) {
+          resultDiv.textContent = data.palindrome
+            ? `"${inputText}" is a palindrome! ✅`
+            : `"${inputText}" is not a palindrome. ❌`;
+        } else {
+          resultDiv.textContent = data.error || 'Something went wrong.';
+        }
+      } catch (error) {
+        resultDiv.textContent = 'Error connecting to the server.';
+      }
+    }
+  </script>
+</body>
+</html>

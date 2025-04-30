@@ -1,12 +1,18 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Middleware to parse JSON bodies
 app.use(express.json());
 
-const savedStrings = {}; // In-memory store (key: id, value: { text, palindrome })
+// Serve static files from the "public" folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Helper function
+// In-memory storage for saved palindrome checks
+const savedStrings = {}; // key: id, value: { text, palindrome }
+
+// Helper function to check for palindrome
 const isPalindrome = (str) => {
   if (!str) return false;
   const cleaned = str.toLowerCase().replace(/[\W_]/g, '');
@@ -66,7 +72,7 @@ app.delete('/check/:id', (req, res) => {
   res.status(200).json({ message: `Record ${id} deleted.` });
 });
 
-// 🔊 Start the server
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
