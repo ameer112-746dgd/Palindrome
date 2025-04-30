@@ -35,7 +35,11 @@
       const resultDiv = document.getElementById('result');
 
       try {
-        const response = await fetch('/check?text=' + encodeURIComponent(inputText));
+        const response = await fetch('/api/check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: inputText })
+          });          
         const data = await response.json();
         if (response.ok) {
           resultDiv.textContent = data.palindrome
